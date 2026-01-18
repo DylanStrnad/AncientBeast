@@ -337,6 +337,11 @@ export class UI {
 
 							const ability = game.activeCreature.abilities[i];
 							// Passive ability icon can cycle between usable abilities
+
+							if(ability.message === game.msg.abilities.noTarget || ability.message === game.msg.abilities.alreadyUsed || ability.message === game.msg.abilities.passiveUnavailable || ability.used){
+								b.cssTransition('cancelIcon', 1000);
+							}
+
 							if (i == 0) {
 								// Joywin
 								const selectedAbility = this.selectNextAbility();
@@ -350,6 +355,7 @@ export class UI {
 										}
 									});
 									b.cssTransition('nextIcon', 1000);
+
 								} else if (selectedAbility === -1) {
 									this.abilitiesButtons.forEach((btn, index) => {
 										if (index === 0) {
@@ -1337,10 +1343,10 @@ export class UI {
 
 	selectAbility(i: number) {
 		//Prevent double click on ability
-		if (this.activeAbility && this.selectedAbility === i) {
-			this.selectAbility(-1);
-			return;
-		}
+		// if (this.activeAbility && this.selectedAbility === i) {
+		// 	this.selectAbility(-1);
+		// 	return;
+		// }
 
 		this.checkAbilities();
 		this.selectedAbility = i;
