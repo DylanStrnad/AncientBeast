@@ -1336,6 +1336,12 @@ export class UI {
 	}
 
 	selectAbility(i: number) {
+		//Prevent double click on ability
+		if (this.activeAbility && this.selectedAbility === i) {
+			this.selectAbility(-1);
+			return;
+		}
+
 		this.checkAbilities();
 		this.selectedAbility = i;
 
